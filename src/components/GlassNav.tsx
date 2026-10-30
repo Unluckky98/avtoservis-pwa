@@ -10,8 +10,9 @@ const items = [
 ] as const;
 
 /**
- * Floating navigation. A CSS backdrop-filter glass is always present; liquid-gl (WebGPU/WebGL)
- * is layered on top only where the device and the user's motion settings allow it.
+ * Floating navigation. A CSS backdrop-filter glass is always present. The liquid-gl refraction layer
+ * (WebGPU) is OFF by default: it was never verified on real devices and is suspected of freezing
+ * iOS Safari. Opt in for testing with `?glass=lens`.
  */
 export function GlassNav() {
   const ref = useRef<HTMLElement>(null);
@@ -28,7 +29,7 @@ export function GlassNav() {
 
   useEffect(() => {
     const el = ref.current;
-    if (!el || prefersReducedMotion() || new URLSearchParams(location.search).get('glass') === 'css') return;
+    if (!el || prefersReducedMotion() || new URLSearchParams(location.search).get('glass') !== 'lens') return;
     let cancelled = false;
     let lens: { destroy?: () => void } | undefined;
     // Refraction only where a real GPU adapter exists; software renderers produce visual noise.
