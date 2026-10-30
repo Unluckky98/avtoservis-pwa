@@ -19,7 +19,7 @@ export function ServicesPage() {
       ) : (
         <VStack gap={3} as="ul" className="m-0 p-0 list-none">
           {s.services.map((x) => (
-            <li key={x.id} className="rounded-2xl border border-border bg-surface p-4">
+            <li key={x.id} className="card-glass p-4">
               <VStack gap={2}>
                 <HStack justify="between" gap={3} vAlign="start">
                   <Heading level={3}>{x.name}</Heading>

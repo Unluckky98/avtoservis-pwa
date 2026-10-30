@@ -13,6 +13,7 @@ import { dateLabel, duration, rub, timeLabel } from '../../lib/format';
 import { downloadIcs } from '../../lib/ics';
 import { turnOnReminder } from '../../lib/push';
 import { useStudio } from '../../app/StudioContext';
+import { CheckCircle, Clock, XCircle } from '@phosphor-icons/react';
 import { EmptyState, ErrorState, ListSkeleton } from '../../components/States';
 
 const STATUS: Record<string, string> = { booked: 'Ожидает подтверждения', accepted: 'Подтверждена', done: 'Выполнена', cancelled: 'Отменена', no_show: 'Не приехали' };
@@ -67,10 +68,13 @@ export function MyBookingPage() {
       {q.isSuccess && q.data && (
         <>
           {note && <Banner status={note.status} title={note.text} collapsible={false} isDismissable onDismiss={() => setNote(null)} />}
-          <VStack gap={2} className="rounded-2xl border border-border bg-surface p-4">
-            <Text type="label" color="accent">{STATUS[q.data.booking.status] ?? q.data.booking.status}</Text>
-            <Heading level={2}>{q.data.booking.service_name}</Heading>
-            <Text>{dateLabel(q.data.booking.starts_at, studio.timezone)}, {timeLabel(q.data.booking.starts_at, studio.timezone)}</Text>
+          <VStack gap={2} className="card-glass p-5">
+            <span className="text-[var(--color-accent)]" aria-hidden="true">
+              {['accepted', 'done'].includes(q.data.booking.status) ? <CheckCircle size={40} weight="fill" /> : ['cancelled', 'no_show'].includes(q.data.booking.status) ? <XCircle size={40} weight="fill" /> : <Clock size={40} weight="fill" />}
+            </span>
+            <Heading level={2}>{STATUS[q.data.booking.status] ?? q.data.booking.status}</Heading>
+            <Text>{dateLabel(q.data.booking.starts_at, studio.timezone)} в {timeLabel(q.data.booking.starts_at, studio.timezone)}</Text>
+            <Heading level={3}>{q.data.booking.service_name}</Heading>
             <Text type="supporting">
               {duration(q.data.booking.duration_minutes)} · {rub(q.data.booking.price_cents)}
               {q.data.booking.car ? ` · ${q.data.booking.car}` : ''}

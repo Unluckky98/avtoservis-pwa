@@ -26,6 +26,7 @@ function ClientLayout() {
   const studio = useStudio();
   return (
     <>
+      <span className="studio-bg" aria-hidden="true" />
       <a href="#main" className="skip-link">К содержимому</a>
       <main id="main" className="app-main mx-auto w-full max-w-[560px]">
         <Outlet />

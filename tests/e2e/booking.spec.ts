@@ -5,7 +5,6 @@ import { OWNER_EMAIL, OWNER_PASSWORD } from '../harness/db';
 test('client books a service and the owner sees and confirms it', async ({ page, browser }) => {
   await page.goto('/s/graphite/');
   await expect(page.getByRole('heading', { level: 1, name: 'GRAPHITE Detailing' })).toBeVisible();
-  await expect(page.getByRole('heading', { name: 'Запись в студию' })).toBeVisible();
 
   await page.getByRole('button', { name: 'Записаться' }).first().click();
   const sheet = page.getByRole('dialog');

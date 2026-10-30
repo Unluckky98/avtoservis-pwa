@@ -10,14 +10,16 @@
 
 @layer components {
   :root { color-scheme: dark; }
-  html, body, #root { min-height: 100%; background: #000; color: #fff; }
+  html, body, #root { min-height: 100%; color: #fff; }
+  html, body { background: #060912; }
+  #root { background: transparent; }
   body { -webkit-tap-highlight-color: transparent; overscroll-behavior-y: none; }
 
   /* Space under content so the floating glass navigation never covers the last block. */
   .app-main { padding-bottom: calc(var(--nav-h, 76px) + env(safe-area-inset-bottom) + 24px); }
 
   .glass {
-    background: rgba(24, 24, 28, 0.42);
+    background: rgba(14, 20, 38, 0.55);
     -webkit-backdrop-filter: blur(22px) saturate(1.6);
     backdrop-filter: blur(22px) saturate(1.6);
     border: 1px solid rgba(255, 255, 255, 0.18);
@@ -40,12 +42,46 @@
     .reveal[data-armed="true"][data-shown="true"] { opacity: 1; transform: none; }
   }
 
-  .hero { position: relative; overflow: hidden; border-radius: 0 0 28px 28px; }
-  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0) 35%, rgba(0,0,0,0.55) 100%); pointer-events: none; }
-  .hero-cta { position: absolute; z-index: 2; left: 16px; right: 16px; bottom: 18px; }
+  /* Navy backdrop with a faint grid and an accent glow (accent comes from the studio theme). */
+  .studio-bg {
+    position: fixed; inset: 0; z-index: -1; pointer-events: none;
+    background:
+      radial-gradient(900px 480px at 50% -140px, color-mix(in srgb, var(--color-accent) 26%, transparent), transparent 70%),
+      linear-gradient(rgba(130, 170, 255, 0.05) 1px, transparent 1px) 0 0 / 44px 44px,
+      linear-gradient(90deg, rgba(130, 170, 255, 0.05) 1px, transparent 1px) 0 0 / 44px 44px;
+  }
 
-  .chip-on { background: var(--color-accent); color: var(--color-on-accent); border-color: var(--color-accent); }
+  .card-glass {
+    background: linear-gradient(160deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.025));
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 24px;
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+  }
+
+  .top-bar { display: flex; align-items: center; justify-content: space-between; padding: 14px 4px 10px; border-bottom: 1px solid rgba(255, 255, 255, 0.06); }
+  .top-bar img { height: 30px; width: auto; display: block; }
+  .icon-btn { display: inline-grid; place-items: center; width: 44px; height: 44px; border-radius: 9999px; color: rgba(255, 255, 255, 0.8); }
+
+  .hero { position: relative; overflow: hidden; border-radius: 28px; border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45); }
+  .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(6, 9, 18, 0.1) 0%, rgba(6, 9, 18, 0) 40%, rgba(6, 9, 18, 0.7) 100%); pointer-events: none; }
+  .hero-cta { position: absolute; z-index: 2; left: 14px; right: 14px; bottom: 14px; display: flex; align-items: center; justify-content: space-between; min-height: 56px; padding: 0 22px; border-radius: 9999px; color: #fff; font-weight: 600; font-size: 1.0625rem; }
+
+  .tile { display: flex; flex-direction: column; gap: 6px; padding: 16px 18px; min-height: 88px; border-radius: 22px; }
+  .tile-value { display: flex; align-items: center; gap: 10px; font-size: 1.5rem; font-weight: 600; line-height: 1.1; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .tile-value.is-small { font-size: 1.25rem; }
+  .tile-label { color: rgba(255, 255, 255, 0.62); font-size: 0.8125rem; }
+
+  .step-bar { display: flex; gap: 6px; }
+  .step-bar > span { flex: 1; height: 3px; border-radius: 9999px; background: rgba(255, 255, 255, 0.14); }
+  .step-bar > span[data-on="true"] { background: var(--color-accent); }
+
+  .pill { border: 1px solid rgba(255, 255, 255, 0.14); background: rgba(255, 255, 255, 0.05); border-radius: 9999px; padding: 10px 16px; min-height: 44px; font-size: 0.9375rem; color: #fff; }
+  .send-btn { display: inline-grid; place-items: center; flex: none; width: 52px; height: 52px; border-radius: 9999px; background: var(--color-accent); color: var(--color-on-accent); }
+  .send-btn:disabled { opacity: 0.45; }
+
+  .chip-on { background: var(--color-accent); color: var(--color-on-accent); border-color: var(--color-accent); border-radius: 18px; }
 
   :focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
   .skip-link { position: absolute; left: -9999px; }

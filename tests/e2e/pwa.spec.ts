@@ -48,7 +48,7 @@ test('no private data is ever stored in the worker caches; sign-out clears the s
 
 test('hero button travels with the photo and the navigation never covers content', async ({ page }) => {
   await page.goto('/s/graphite/');
-  const hero = page.locator('header.hero');
+  const hero = page.locator('section.hero');
   const cta = hero.getByRole('button', { name: 'Записаться' });
   await expect(cta).toBeVisible();
   const rel = async () => {

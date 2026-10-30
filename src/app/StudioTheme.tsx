@@ -16,7 +16,10 @@ export function StudioTheme({ accent, children }: { accent?: string | null; chil
       tokens: {
         '--color-accent': [a, a],
         '--color-on-accent': [onAccent(a), onAccent(a)],
-        '--color-background-body': ['#000000', '#000000'],
+        '--color-background-body': ['#060912', '#060912'],
+        '--color-background-surface': ['#0c1224', '#0c1224'],
+        '--color-background-popover': ['#0c1224', '#0c1224'],
+        '--color-background-card': ['#0c1224', '#0c1224'],
         '--focus-outline-color': 'var(--color-accent)',
       },
     });

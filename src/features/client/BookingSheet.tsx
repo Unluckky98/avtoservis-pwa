@@ -15,6 +15,7 @@ import { addDaysKey, dateLabel, dayKey, duration, rub, timeLabel, todayIn, weekd
 import { downloadIcs } from '../../lib/ics';
 import { saveToken } from '../../lib/tenant';
 import { useStudio } from '../../app/StudioContext';
+import { ArrowUpRight } from '@phosphor-icons/react';
 import { EmptyState, ErrorState } from '../../components/States';
 
 type Step = 'service' | 'slot' | 'details' | 'done';
@@ -110,13 +111,20 @@ export function BookingSheet({ open, serviceId, onClose }: { open: boolean; serv
     }
   }
 
-  const title = { service: 'Выберите услугу', slot: 'Дата и время', details: 'Ваши данные', done: 'Вы записаны' }[step];
+  const title = { service: 'Выберите услугу', slot: 'Дата и время', details: 'Ваш автомобиль', done: 'Вы записаны' }[step];
+  const stepNo = { service: 1, slot: 2, details: 3, done: 4 }[step];
 
   return (
     <BottomSheet isOpen={open} onOpenChange={(o) => !o && onClose()} label="Запись в студию" height="tall" purpose={step === 'details' ? 'form' : 'info'}>
       <VStack gap={4}>
         <div ref={headRef} tabIndex={-1} className="outline-none">
           <Heading level={2}>{title}</Heading>
+          <Text type="supporting">Шаг {stepNo} из 4</Text>
+          <span className="step-bar mt-2" aria-hidden="true">
+            {[1, 2, 3, 4].map((n) => (
+              <span key={n} data-on={n <= stepNo} />
+            ))}
+          </span>
           {step !== 'service' && step !== 'done' && service && (
             <Text type="supporting">
               {service.name} · {rub(service.price_cents)} · {duration(service.duration_minutes)}
@@ -136,17 +144,24 @@ export function BookingSheet({ open, serviceId, onClose }: { open: boolean; serv
               <li key={s.id}>
                 <button
                   type="button"
-                  className="w-full text-left rounded-2xl border border-border bg-surface p-4 min-h-[64px]"
+                  className="card-glass w-full text-left p-4 min-h-[64px]"
                   onClick={() => {
                     setSvcId(s.id);
                     setStep('slot');
                   }}
                 >
-                  <HStack justify="between" gap={3}>
-                    <Text weight="semibold">{s.name}</Text>
-                    <Text weight="semibold" hasTabularNumbers>{rub(s.price_cents)}</Text>
+                  <HStack justify="between" gap={3} vAlign="start">
+                    <VStack gap={1}>
+                      <Text weight="semibold">{s.name}</Text>
+                      <Text type="supporting">{duration(s.duration_minutes)}</Text>
+                    </VStack>
+                    <VStack gap={1} hAlign="end">
+                      <Text weight="semibold" hasTabularNumbers>{rub(s.price_cents)}</Text>
+                      <span className="inline-flex items-center gap-1 text-sm text-white/70">
+                        Выбрать <ArrowUpRight size={16} aria-hidden="true" />
+                      </span>
+                    </VStack>
                   </HStack>
-                  <Text type="supporting">{duration(s.duration_minutes)}</Text>
                 </button>
               </li>
             ))}
@@ -181,7 +196,7 @@ export function BookingSheet({ open, serviceId, onClose }: { open: boolean; serv
                           setDay(k);
                           setSlot(null);
                         }}
-                        className={`shrink-0 min-w-[64px] rounded-2xl border px-3 py-2 text-center ${on ? 'chip-on' : 'border-border bg-surface'}`}
+                        className={`shrink-0 min-w-[64px] border px-3 py-2 text-center ${on ? 'chip-on' : 'card-glass !rounded-[18px]'}`}
                       >
                         <span className="block text-xs uppercase opacity-80">{weekdayShort(first, studio.timezone)}</span>
                         <span className="block text-lg font-semibold">{k.slice(8)}</span>
@@ -199,8 +214,8 @@ export function BookingSheet({ open, serviceId, onClose }: { open: boolean; serv
                       aria-checked={slot === s.start}
                       disabled={!s.available}
                       onClick={() => setSlot(s.start)}
-                      className={`min-w-[78px] min-h-[44px] rounded-xl border px-3 py-2 text-base ${
-                        slot === s.start ? 'chip-on' : s.available ? 'border-border bg-surface' : 'border-border/40 text-white/30 line-through'
+                      className={`min-w-[78px] min-h-[44px] rounded-[14px] border px-3 py-2 text-base ${
+                        slot === s.start ? 'chip-on' : s.available ? 'card-glass !rounded-[14px]' : 'border-white/10 text-white/30 line-through'
                       }`}
                     >
                       {timeLabel(s.start, studio.timezone)}

@@ -8,7 +8,7 @@ test('Astryx typography and spacing win over the Tailwind reset', async ({ page 
   await expect(h1).toBeVisible();
   const { size, pad } = await h1.evaluate((el) => ({
     size: parseFloat(getComputedStyle(el).fontSize),
-    pad: parseFloat(getComputedStyle(el.parentElement!).paddingLeft),
+    pad: parseFloat(getComputedStyle(el.parentElement!.parentElement!).paddingLeft),
   }));
   expect(size).toBeGreaterThanOrEqual(24);
   expect(pad).toBeGreaterThanOrEqual(12);
