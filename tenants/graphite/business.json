@@ -1,8 +1,8 @@
 {
   "slug": "graphite",
-  "name": "GRAPHITE Detailing",
-  "tagline": "Детейлинг премиум-класса: защита, полировка, керамика",
-  "description": "Студия детейлинга в Москве. Работаем в двух закрытых боксах, закрепляем за каждой машиной мастера и показываем фотоотчёт на каждом этапе.",
+  "name": "SGX Detailing",
+  "tagline": "Детейлинг, который возвращает кузову глубину, а салону — чистоту",
+  "description": "Студия детейлинга: мойка, химчистка, полировка и керамика в закрытых боксах. Закрепляем за каждой машиной мастера и показываем фотоотчёт на каждом этапе.",
   "timezone": "Europe/Moscow",
   "accent": "#4690FF",
   "isDemo": true,
@@ -10,35 +10,138 @@
     "address": "Москва, ул. Дубининская, 57с3 (демо-адрес)",
     "phone": "+7 495 000-00-01"
   },
-  "images": { "logo": "media/logo.png", "hero": "media/hero.jpg", "heroAlt": "Тёмный седан в боксе GRAPHITE Detailing" },
-  "booking": { "slotStepMinutes": 30, "leadTimeMinutes": 120, "cancelBeforeHours": 24, "maxHorizonDays": 60 },
+  "images": {
+    "logo": "media/logo.png",
+    "hero": "media/hero.jpg",
+    "heroAlt": "Спорткар в синем свете студии SGX Detailing"
+  },
+  "booking": {
+    "slotStepMinutes": 30,
+    "leadTimeMinutes": 120,
+    "cancelBeforeHours": 24,
+    "maxHorizonDays": 60
+  },
   "hours": {
-    "mon": ["09:00", "20:00"], "tue": ["09:00", "20:00"], "wed": ["09:00", "20:00"],
-    "thu": ["09:00", "20:00"], "fri": ["09:00", "20:00"], "sat": ["10:00", "18:00"], "sun": null
+    "mon": [
+      "09:00",
+      "20:00"
+    ],
+    "tue": [
+      "09:00",
+      "20:00"
+    ],
+    "wed": [
+      "09:00",
+      "20:00"
+    ],
+    "thu": [
+      "09:00",
+      "20:00"
+    ],
+    "fri": [
+      "09:00",
+      "20:00"
+    ],
+    "sat": [
+      "10:00",
+      "18:00"
+    ],
+    "sun": null
   },
   "resources": [
-    { "key": "box-1", "name": "Бокс 1" },
-    { "key": "box-2", "name": "Бокс 2" }
+    {
+      "key": "box-1",
+      "name": "Бокс 1"
+    },
+    {
+      "key": "box-2",
+      "name": "Бокс 2"
+    }
   ],
   "services": [
-    { "key": "wash-premium", "name": "Мойка премиум", "description": "Двухфазная мойка, очистка дисков и арок, сушка, защитный состав.", "price": 2500, "durationMinutes": 90, "bufferMinutes": 15 },
-    { "key": "antirain", "name": "Антидождь", "description": "Гидрофобное покрытие стёкол, обработка щёток.", "price": 1800, "durationMinutes": 40, "bufferMinutes": 10 },
-    { "key": "interior", "name": "Химчистка салона", "description": "Глубокая чистка сидений, потолка и пластика, озонирование.", "price": 9500, "durationMinutes": 300, "bufferMinutes": 30 },
-    { "key": "polish", "name": "Полировка кузова", "description": "Абразивная и финишная полировка, устранение голограмм. Два рабочих дня.", "price": 18000, "durationMinutes": 2880, "bufferMinutes": 60 },
-    { "key": "ceramic-9h", "name": "Керамика 9H", "description": "Подготовка кузова и нанесение керамики в два слоя. Три рабочих дня.", "price": 45000, "durationMinutes": 4320, "bufferMinutes": 60, "resources": ["box-1"] }
+    {
+      "key": "wash-complex",
+      "name": "Комплексная мойка",
+      "description": "Двухфазная мойка, очистка дисков и арок, сушка, защитный состав.",
+      "price": 3500,
+      "durationMinutes": 120,
+      "bufferMinutes": 15
+    },
+    {
+      "key": "interior",
+      "name": "Химчистка салона",
+      "description": "Цена от 12 000 ₽, итог зависит от состояния салона. Глубокая чистка сидений, потолка и пластика. Один рабочий день.",
+      "price": 12000,
+      "durationMinutes": 1440,
+      "bufferMinutes": 30
+    },
+    {
+      "key": "polish",
+      "name": "Полировка кузова",
+      "description": "Абразивная и финишная полировка, устранение голограмм. Два рабочих дня.",
+      "price": 18000,
+      "durationMinutes": 2880,
+      "bufferMinutes": 60
+    },
+    {
+      "key": "ceramic-9h",
+      "name": "Керамика 9H",
+      "description": "Подготовка кузова и нанесение керамики в два слоя. Три рабочих дня.",
+      "price": 45000,
+      "durationMinutes": 4320,
+      "bufferMinutes": 60,
+      "resources": [
+        "box-1"
+      ]
+    }
   ],
   "cards": [
-    { "title": "Гарантия на покрытия", "body": "До 3 лет на керамику, письменный сертификат с VIN." },
-    { "title": "Фотоотчёт", "body": "Присылаем фото до, во время и после работ." },
-    { "title": "Закрытые боксы", "body": "Машина не стоит на улице: чистая среда и контроль света." }
+    {
+      "title": "Гарантия на покрытия",
+      "body": "До 3 лет на керамику, письменный сертификат с VIN."
+    },
+    {
+      "title": "Фотоотчёт",
+      "body": "Присылаем фото до, во время и после работ."
+    },
+    {
+      "title": "Закрытые боксы",
+      "body": "Машина не стоит на улице: чистая среда и контроль света."
+    }
   ],
   "gallery": [
-    { "key": "work-1", "image": "media/work-1.jpg", "caption": "Седан после полировки" },
-    { "key": "work-2", "image": "media/work-2.jpg", "caption": "Диски после очистки" },
-    { "key": "work-3", "image": "media/work-3.jpg", "caption": "Керамика на крыше" },
-    { "key": "work-4", "image": "media/work-4.jpg", "caption": "Защита арок" },
-    { "key": "work-5", "image": "media/work-5.jpg", "caption": "Капот после обработки" },
-    { "key": "work-6", "image": "media/work-6.jpg", "caption": "Передний бампер" }
+    {
+      "key": "work-1",
+      "image": "media/work-1.jpg",
+      "caption": "Седан после полировки"
+    },
+    {
+      "key": "work-2",
+      "image": "media/work-2.jpg",
+      "caption": "Диски после очистки"
+    },
+    {
+      "key": "work-3",
+      "image": "media/work-3.jpg",
+      "caption": "Керамика на крыше"
+    },
+    {
+      "key": "work-4",
+      "image": "media/work-4.jpg",
+      "caption": "Защита арок"
+    },
+    {
+      "key": "work-5",
+      "image": "media/work-5.jpg",
+      "caption": "Капот после обработки"
+    },
+    {
+      "key": "work-6",
+      "image": "media/work-6.jpg",
+      "caption": "Передний бампер"
+    }
   ],
-  "owner": { "email": "owner@graphite.example" }
+  "owner": {
+    "email": "owner@graphite.example"
+  }
 }

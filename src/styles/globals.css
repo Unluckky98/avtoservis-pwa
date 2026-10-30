@@ -60,7 +60,7 @@
   }
 
   .top-bar { display: flex; align-items: center; justify-content: space-between; padding: 14px 4px 10px; border-bottom: 1px solid rgba(255, 255, 255, 0.06); }
-  .top-bar img { height: 30px; width: auto; display: block; }
+  .top-bar img { height: 26px; width: auto; display: block; }
   .icon-btn { display: inline-grid; place-items: center; width: 44px; height: 44px; border-radius: 9999px; color: rgba(255, 255, 255, 0.8); }
 
   .hero { position: relative; overflow: hidden; border-radius: 28px; border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45); }
@@ -70,7 +70,8 @@
 
   .tile { display: flex; flex-direction: column; gap: 6px; padding: 16px 18px; min-height: 88px; border-radius: 22px; }
   .tile-value { display: flex; align-items: center; gap: 10px; font-size: 1.5rem; font-weight: 600; line-height: 1.1; white-space: nowrap; font-variant-numeric: tabular-nums; }
-  .tile-value.is-small { font-size: 1.25rem; }
+  .tile-value > svg { flex: none; }
+  .tile-value.is-small { font-size: 1.0625rem; gap: 8px; }
   .tile-label { color: rgba(255, 255, 255, 0.62); font-size: 0.8125rem; }
 
   .step-bar { display: flex; gap: 6px; }

@@ -4,11 +4,11 @@ import { OWNER_EMAIL, OWNER_PASSWORD } from '../harness/db';
 /** The one flow the product exists for: choose a service → get a confirmation → the owner sees the booking. */
 test('client books a service and the owner sees and confirms it', async ({ page, browser }) => {
   await page.goto('/s/graphite/');
-  await expect(page.getByRole('heading', { level: 1, name: 'GRAPHITE Detailing' })).toBeVisible();
+  await expect(page.getByRole('heading', { level: 1, name: 'SGX Detailing' })).toBeVisible();
 
   await page.getByRole('button', { name: 'Записаться' }).first().click();
   const sheet = page.getByRole('dialog');
-  await sheet.getByRole('button', { name: /Антидождь/ }).click();
+  await sheet.getByRole('button', { name: /Комплексная мойка/ }).click();
   await sheet.locator('button[role=radio]:not([disabled])').filter({ hasText: /^\d\d:\d\d$/ }).nth(1).click();
   await sheet.getByRole('button', { name: 'Далее' }).click();
 
@@ -25,7 +25,7 @@ test('client books a service and the owner sees and confirms it', async ({ page,
   await sheet.getByRole('button', { name: 'Моя запись' }).click();
 
   await expect(page).toHaveURL(/\/s\/graphite\/my$/);
-  await expect(page.getByRole('heading', { name: 'Антидождь' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Комплексная мойка' })).toBeVisible();
   await expect(page.getByText('Ожидает подтверждения')).toBeVisible();
   const when = await page.locator('main p, main span').filter({ hasText: /\d\d:\d\d/ }).first().innerText();
   const time = /\d\d:\d\d/.exec(when)![0];
@@ -37,7 +37,7 @@ test('client books a service and the owner sees and confirms it', async ({ page,
   await owner.getByLabel('Почта').fill(OWNER_EMAIL);
   await owner.getByLabel('Пароль').fill(OWNER_PASSWORD);
   await owner.getByRole('button', { name: 'Войти' }).click();
-  await expect(owner.getByRole('heading', { level: 1, name: 'GRAPHITE Detailing' })).toBeVisible();
+  await expect(owner.getByRole('heading', { level: 1, name: 'SGX Detailing' })).toBeVisible();
   for (let i = 0; i < 8 && !(await owner.getByText(/Анна Тестова/).count()); i++) {
     await owner.getByRole('button', { name: '→' }).click();
     await owner.waitForTimeout(400);

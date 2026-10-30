@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test';
 import { OWNER_EMAIL, OWNER_PASSWORD } from '../harness/db';
 
 test('each studio has its own shell, manifest, worker scope and caches', async ({ page }) => {
-  for (const [slug, name] of [['graphite', 'GRAPHITE Detailing'], ['garage47', 'Гараж 47']] as const) {
+  for (const [slug, name] of [['graphite', 'SGX Detailing'], ['garage47', 'Гараж 47']] as const) {
     await page.goto(`/s/${slug}/my`); // a deep link must open the right studio's shell
     await expect(page).toHaveTitle(name);
     expect(await page.locator('link[rel=manifest]').getAttribute('href')).toBe(`/s/${slug}/manifest.webmanifest`);

@@ -45,7 +45,7 @@ export function HomePage() {
         </Link>
       </header>
 
-      <section className="hero" style={{ height: 'min(46svh, 360px)' }} aria-label={s.name}>
+      <section className="hero" style={{ height: 'min(38svh, 300px)' }} aria-label={s.name}>
         {s.hero_url ? <img src={s.hero_url} alt={s.hero_alt ?? s.name} fetchPriority="high" /> : <span className="block h-full bg-surface" aria-hidden="true" />}
         <button type="button" className="hero-cta glass" onClick={openBooking}>
           <span>Записаться</span>
