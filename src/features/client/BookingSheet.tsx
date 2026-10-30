@@ -15,7 +15,7 @@ import { addDaysKey, dateLabel, dayKey, duration, rub, timeLabel, todayIn, weekd
 import { downloadIcs } from '../../lib/ics';
 import { saveToken } from '../../lib/tenant';
 import { useStudio } from '../../app/StudioContext';
-import { ArrowUpRight } from '@phosphor-icons/react';
+import { ArrowUpRight, X } from '@phosphor-icons/react';
 import { EmptyState, ErrorState } from '../../components/States';
 import { CarPicker } from '../../components/CarPicker';
 import { carString, EMPTY_CAR, type CarValue } from '../../lib/cars';
@@ -126,7 +126,10 @@ export function BookingSheet({ open, serviceId, onClose }: { open: boolean; serv
     <BottomSheet isOpen={open} onOpenChange={(o) => !o && onClose()} label="Запись в студию" height="tall" purpose={step === 'details' ? 'form' : 'info'}>
       <VStack gap={4}>
         <div ref={headRef} tabIndex={-1} className="outline-none">
-          <Heading level={2}>{title}</Heading>
+          <HStack justify="between" vAlign="center">
+            <Heading level={2}>{title}</Heading>
+            <Button label="Закрыть" icon={<X size={22} aria-hidden="true" />} isIconOnly variant="ghost" onClick={onClose} />
+          </HStack>
           <Text type="supporting">Шаг {stepNo} из 4</Text>
           <span className="step-bar mt-2" aria-hidden="true">
             {[1, 2, 3, 4].map((n) => (

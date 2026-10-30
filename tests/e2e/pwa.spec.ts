@@ -93,3 +93,18 @@ test('unknown studio shows an honest state, other routes keep working', async ({
   await expect(page.getByRole('heading', { level: 1, name: 'Услуги' })).toBeVisible();
   void context;
 });
+
+test('assistant and booking sheets have a close button (swipe is not the only way out)', async ({ page }) => {
+  await page.goto('/s/graphite/?chat=1');
+  const sheet = page.getByRole('dialog');
+  await expect(sheet.getByRole('heading', { name: 'Помощник студии' })).toBeVisible();
+  await sheet.getByRole('button', { name: 'Закрыть' }).click();
+  await expect(sheet).toBeHidden();
+  await expect(page).not.toHaveURL(/chat=/);
+
+  await page.goto('/s/graphite/?book=new');
+  const booking = page.getByRole('dialog');
+  await expect(booking.getByRole('heading', { name: 'Выберите услугу' })).toBeVisible();
+  await booking.getByRole('button', { name: 'Закрыть' }).click();
+  await expect(booking).toBeHidden();
+});
