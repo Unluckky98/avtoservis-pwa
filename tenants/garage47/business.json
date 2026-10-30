@@ -1,0 +1,44 @@
+{
+  "slug": "garage47",
+  "name": "Гараж 47",
+  "tagline": "Шиномонтаж, ТО и ремонт без очередей",
+  "description": "Автосервис в Екатеринбурге на три поста. Записывайтесь на удобное время: приезжаете и сразу заезжаете в свободный бокс.",
+  "timezone": "Asia/Yekaterinburg",
+  "accent": "#FF8A3D",
+  "isDemo": true,
+  "contacts": {
+    "address": "Екатеринбург, ул. Монтёров, 47 (демо-адрес)",
+    "phone": "+7 343 000-00-47"
+  },
+  "images": { "logo": "media/logo.png", "hero": "media/hero.jpg", "heroAlt": "Автомобиль на подъёмнике в боксе Гаража 47" },
+  "booking": { "slotStepMinutes": 30, "leadTimeMinutes": 60, "cancelBeforeHours": 12, "maxHorizonDays": 45 },
+  "hours": {
+    "mon": ["08:00", "21:00"], "tue": ["08:00", "21:00"], "wed": ["08:00", "21:00"],
+    "thu": ["08:00", "21:00"], "fri": ["08:00", "21:00"], "sat": ["10:00", "18:00"], "sun": null
+  },
+  "resources": [
+    { "key": "post-1", "name": "Пост 1" },
+    { "key": "post-2", "name": "Пост 2" },
+    { "key": "post-3", "name": "Пост 3" }
+  ],
+  "services": [
+    { "key": "tyres-r17", "name": "Шиномонтаж R17", "description": "Снятие, монтаж, балансировка четырёх колёс.", "price": 3200, "durationMinutes": 60, "bufferMinutes": 0 },
+    { "key": "diag-suspension", "name": "Диагностика подвески", "description": "Осмотр на подъёмнике, отчёт по узлам.", "price": 1500, "durationMinutes": 45, "bufferMinutes": 0 },
+    { "key": "service-1", "name": "ТО-1", "description": "Масло, фильтры, проверка жидкостей.", "price": 6900, "durationMinutes": 180, "bufferMinutes": 15, "resources": ["post-1", "post-2"] },
+    { "key": "body-repair", "name": "Кузовной ремонт", "description": "Рихтовка и покраска одной детали. Четыре рабочих дня.", "price": 35000, "durationMinutes": 5760, "bufferMinutes": 120, "resources": ["post-3"] }
+  ],
+  "cards": [
+    { "title": "Без очередей", "body": "Заезжаете ровно ко времени записи." },
+    { "title": "Прозрачные цены", "body": "Стоимость фиксируется при записи и не меняется." },
+    { "title": "Оригинал и аналоги", "body": "Подберём запчасти под бюджет и объясним разницу." }
+  ],
+  "gallery": [
+    { "key": "work-1", "image": "media/work-1.jpg", "caption": "После ТО" },
+    { "key": "work-2", "image": "media/work-2.jpg", "caption": "Колёса R17" },
+    { "key": "work-3", "image": "media/work-3.jpg", "caption": "Диагностика" },
+    { "key": "work-4", "image": "media/work-4.jpg", "caption": "Кузовной ремонт" },
+    { "key": "work-5", "image": "media/work-5.jpg", "caption": "Подготовка к покраске" },
+    { "key": "work-6", "image": "media/work-6.jpg", "caption": "Готовый автомобиль" }
+  ],
+  "owner": { "email": "owner@garage47.example" }
+}

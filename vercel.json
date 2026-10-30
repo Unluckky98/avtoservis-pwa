@@ -1,0 +1,15 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "pnpm build",
+  "outputDirectory": "dist",
+  "rewrites": [
+    { "source": "/s/:slug/:path+/", "destination": "/s/:slug/index.html" },
+    { "source": "/s/:slug/:path*", "destination": "/s/:slug/index.html" }
+  ],
+  "headers": [
+    { "source": "/s/:slug/sw.js", "headers": [{ "key": "Cache-Control", "value": "no-cache" }, { "key": "Service-Worker-Allowed", "value": "/s/" }] },
+    { "source": "/s/:slug/index.html", "headers": [{ "key": "Cache-Control", "value": "no-cache" }] },
+    { "source": "/s/:slug/manifest.webmanifest", "headers": [{ "key": "Cache-Control", "value": "no-cache" }] },
+    { "source": "/assets/(.*)", "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }] }
+  ]
+}

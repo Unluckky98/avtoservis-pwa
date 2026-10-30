@@ -1,0 +1,30 @@
+# Minimal Supabase CLI configuration. Create your own project and link it: `supabase link --project-ref <ref>`.
+project_id = "avtoservis-pwa"
+
+[api]
+enabled = true
+schemas = ["public"]
+extra_search_path = ["public", "extensions"]
+
+[db]
+major_version = 17
+
+[db.seed]
+enabled = true
+sql_paths = ["./seed.sql"]
+
+# Public booking flow and assistant are called without a signed-in user.
+[functions.assistant]
+verify_jwt = false
+
+# Called by Cron with its own shared secret header.
+[functions.push-dispatch]
+verify_jwt = false
+
+# No public owner sign-up: owners are created by `pnpm owner:create` (admin API) and bound to a studio.
+[auth]
+enable_signup = false
+
+[auth.email]
+enable_signup = false
+enable_confirmations = false

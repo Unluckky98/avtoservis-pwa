@@ -1,0 +1,48 @@
+{
+  "slug": "new-studio",
+  "name": "Название студии",
+  "tagline": "Короткий слоган студии",
+  "description": "Пара предложений о студии: чем занимается, чем отличается, для кого.",
+  "timezone": "Europe/Moscow",
+  "accent": "#4690FF",
+  "isDemo": true,
+  "contacts": {
+    "address": "Город, улица, дом",
+    "phone": "+7 900 000-00-00"
+  },
+  "images": {
+    "logo": "media/logo.png",
+    "hero": "media/hero.jpg",
+    "heroAlt": "Автомобиль в боксе студии"
+  },
+  "booking": {
+    "slotStepMinutes": 30,
+    "leadTimeMinutes": 120,
+    "cancelBeforeHours": 24,
+    "maxHorizonDays": 60
+  },
+  "hours": {
+    "mon": ["09:00", "20:00"],
+    "tue": ["09:00", "20:00"],
+    "wed": ["09:00", "20:00"],
+    "thu": ["09:00", "20:00"],
+    "fri": ["09:00", "20:00"],
+    "sat": ["10:00", "18:00"],
+    "sun": null
+  },
+  "resources": [
+    { "key": "box-1", "name": "Бокс 1" }
+  ],
+  "services": [
+    { "key": "service-1", "name": "Первая услуга", "description": "Что входит в услугу", "price": 3000, "durationMinutes": 90, "bufferMinutes": 15 }
+  ],
+  "cards": [
+    { "title": "Первая карточка", "body": "Короткий факт о студии." },
+    { "title": "Вторая карточка", "body": "Ещё один факт." },
+    { "title": "Третья карточка", "body": "И ещё один." }
+  ],
+  "gallery": [
+    { "key": "work-1", "image": "media/work-1.jpg", "caption": "Пример работы" }
+  ],
+  "owner": { "email": "owner@example.com" }
+}
