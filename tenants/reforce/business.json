@@ -93,7 +93,22 @@
     {
       "key": "work-1",
       "image": "media/work-1.jpg",
-      "caption": "Пример работы"
+      "caption": "Porsche Panamera: полная оклейка в цветной полиуретан GSWF"
+    },
+    {
+      "key": "work-2",
+      "image": "media/work-2.jpg",
+      "caption": "BMW X7: восстановительная полировка с керамикой ArtDeshine NGC+"
+    },
+    {
+      "key": "work-3",
+      "image": "media/work-3.jpg",
+      "caption": "Porsche Panamera: готовая работа"
+    },
+    {
+      "key": "work-4",
+      "image": "media/work-4.jpg",
+      "caption": "BMW X7: результат полировки"
     }
   ],
   "owner": {
