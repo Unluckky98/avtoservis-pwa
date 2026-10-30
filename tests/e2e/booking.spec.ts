@@ -18,8 +18,12 @@ test('client books a service and the owner sees and confirms it', async ({ page,
   await expect(sheet.getByText('Введите номер телефона полностью')).toBeVisible();
 
   await sheet.getByLabel('Имя').fill('Анна Тестова');
-  await sheet.getByLabel('Телефон').fill('+7 912 345-67-89');
-  await sheet.getByLabel('Автомобиль').fill('Audi Q5');
+  await sheet.getByLabel('Телефон').fill('89123456789');
+  await expect(sheet.getByLabel('Телефон')).toHaveValue('+7 (912) 345-67-89');
+  await sheet.locator('button[aria-haspopup=listbox]').first().click();
+  await page.getByRole('option', { name: 'Audi', exact: true }).click();
+  await sheet.locator('button[aria-haspopup=listbox]').nth(1).click();
+  await page.getByRole('option', { name: 'Q5', exact: true }).click();
   await sheet.getByRole('button', { name: 'Записаться' }).click();
   await expect(sheet.getByText('Запись создана')).toBeVisible();
   await sheet.getByRole('button', { name: 'Моя запись' }).click();

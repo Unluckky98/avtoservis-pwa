@@ -1,5 +1,7 @@
 import { useMemo, type ReactNode } from 'react';
 import { Theme, defineTheme } from '@astryxdesign/core/theme';
+import { InternationalizationProvider } from '@astryxdesign/core/i18n';
+import ruRU from '@astryxdesign/core/locales/ru-RU.json';
 import { neutralTheme } from '@astryxdesign/theme-neutral/built';
 import { themes, defaultThemeSlug } from '../astryx-themes';
 import { onAccent } from '../lib/color';
@@ -25,8 +27,10 @@ export function StudioTheme({ accent, children }: { accent?: string | null; chil
     });
   }, [accent]);
   return (
-    <Theme theme={theme} mode="dark">
-      {children}
-    </Theme>
+    <InternationalizationProvider locale="ru-RU" messages={{ 'ru-RU': ruRU }}>
+      <Theme theme={theme} mode="dark">
+        {children}
+      </Theme>
+    </InternationalizationProvider>
   );
 }

@@ -17,12 +17,13 @@ import { saveToken } from '../../lib/tenant';
 import { useStudio } from '../../app/StudioContext';
 import { ArrowUpRight } from '@phosphor-icons/react';
 import { EmptyState, ErrorState } from '../../components/States';
+import { CarPicker } from '../../components/CarPicker';
+import { carString, EMPTY_CAR, type CarValue } from '../../lib/cars';
+import { formatRuPhone, isRuPhoneComplete, normalizeRuPhone } from '../../lib/phone';
 
 type Step = 'service' | 'slot' | 'details' | 'done';
 const WINDOW_DAYS = 14;
 
-const PHONE_OK = /^\+?[0-9]{10,15}$/;
-const normPhone = (s: string) => s.replace(/[^0-9+]/g, '');
 
 export function BookingSheet({ open, serviceId, onClose }: { open: boolean; serviceId: string | null; onClose: () => void }) {
   const studio = useStudio();
@@ -35,7 +36,7 @@ export function BookingSheet({ open, serviceId, onClose }: { open: boolean; serv
   const [slot, setSlot] = useState<string | null>(null);
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
-  const [car, setCar] = useState('');
+  const [car, setCar] = useState<CarValue>(EMPTY_CAR);
   const [touched, setTouched] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<{ booking: Booking } | null>(null);
@@ -83,18 +84,25 @@ export function BookingSheet({ open, serviceId, onClose }: { open: boolean; serv
   const activeDay = day && freeDays.includes(day) ? day : (freeDays[0] ?? null);
 
   const nameErr = name.trim().length < 2 ? 'Укажите имя' : null;
-  const phoneErr = PHONE_OK.test(normPhone(phone)) ? null : 'Введите номер телефона полностью';
+  // TextInput has no inputMode prop: ask phones for the numeric keypad on the phone field.
+  useEffect(() => {
+    if (step !== 'details') return;
+    const t = setTimeout(() => document.querySelector('input[autocomplete="tel"]')?.setAttribute('inputmode', 'tel'), 0);
+    return () => clearTimeout(t);
+  }, [step, open]);
+
+  const phoneErr = isRuPhoneComplete(phone) ? null : 'Введите номер телефона полностью';
   const valid = !nameErr && !phoneErr;
 
   async function submit() {
     setTouched(true);
     setError(null);
     if (!valid || !service || !slot) return;
-    const fp = [service.id, slot, normPhone(phone), name.trim().toLowerCase()].join('|');
+    const fp = [service.id, slot, normalizeRuPhone(phone), name.trim().toLowerCase()].join('|');
     // Same data = same idempotency key, so a retry after a network failure can never double-book.
     if (attempt.current?.fp !== fp) attempt.current = { fp, key: `web-${crypto.randomUUID()}` };
     try {
-      const r = await createBooking({ slug: studio.slug, serviceId: service.id, startsAt: slot, name: name.trim(), phone: normPhone(phone), car: car.trim(), key: attempt.current.key });
+      const r = await createBooking({ slug: studio.slug, serviceId: service.id, startsAt: slot, name: name.trim(), phone: normalizeRuPhone(phone), car: carString(car), key: attempt.current.key });
       saveToken(studio.slug, r.token);
       void qc.invalidateQueries({ queryKey: ['availability'] });
       void qc.invalidateQueries({ queryKey: ['my-booking'] });
@@ -244,8 +252,8 @@ export function BookingSheet({ open, serviceId, onClose }: { open: boolean; serv
                 {dateLabel(slot, studio.timezone)}, {timeLabel(slot, studio.timezone)}
               </Text>
               <TextInput label="Имя" value={name} onChange={setName} autoComplete="name" isRequired status={touched && nameErr ? { type: 'error', message: nameErr } : undefined} />
-              <TextInput label="Телефон" value={phone} onChange={setPhone} autoComplete="tel" placeholder="+7 900 000-00-00" isRequired status={touched && phoneErr ? { type: 'error', message: phoneErr } : undefined} />
-              <TextInput label="Автомобиль" value={car} onChange={setCar} placeholder="Марка и модель" isOptional />
+              <TextInput label="Телефон" value={phone} onChange={(v) => setPhone(formatRuPhone(v))} autoComplete="tel" placeholder="+7 (900) 000-00-00" isRequired status={touched && phoneErr ? { type: 'error', message: phoneErr } : undefined} />
+              <CarPicker value={car} onChange={setCar} />
               <Text type="supporting">Регистрация не нужна: запись сохранится на этом устройстве, по ссылке вы сможете её отменить.</Text>
               <HStack gap={2}>
                 <Button label="Назад" variant="ghost" width={104} onClick={() => setStep('slot')} />
